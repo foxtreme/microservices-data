@@ -1,0 +1,15 @@
+version: "3"
+services:
+  download:
+    image: josanabr/mycurl
+    volumes:
+      - ./data:/usr/local/data
+      - ./mybin:/usr/local/mybin
+    command: /usr/local/mybin/adult.data.sh
+  rmquestionmark:
+    image: ubuntu
+    volumes:
+      - ./data:/usr/local/data
+      - ./mybin:/usr/local/mybin
+    command: /usr/local/mybin/rmquestionmark.sh /usr/local/data/adult.data
+ 
