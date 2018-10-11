@@ -16,4 +16,5 @@ Para ejecutar este contenedor de modo que los directorios `data` y `mybin` en es
 docker run --rm -it --hostname demo -v $(pwd)/data:/usr/local/data -v $(pwd)/mybin:/usr/local/mybin josanabr/mycurl /bin/bash
 ```
 
+**CUIDADO** en este caso debe asegurarse de cambiar `josanabr` por su nombre de usuario en Docker Hub.
 
