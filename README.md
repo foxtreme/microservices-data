@@ -44,7 +44,23 @@ Una vez ejecutado este comando, usted debera encontrar en el directorio `$(pwd)/
 ---
 
 Suponga ahora que usted tiene otro contenedor donde se procesan los datos.
-Construya un contenedor que lo que hace es remover los datos `',?,'` del archivo descargado. 
-Para llevar a cabo esta tarea revisar las [diapositivas de la clase](https://docs.google.com/presentation/d/1l0WVWwXJE4K2kDnH-3q1e819doAnW8sneF40s7k78yo/edit?usp=sharing).
+De acuerdo a como lo sugieren las [diapositivas de la clase](https://docs.google.com/presentation/d/1l0WVWwXJE4K2kDnH-3q1e819doAnW8sneF40s7k78yo/edit?usp=sharing) la linea de comandos que quita `, ?,` es `sed -i .bak "s/, ?,/,,/g" adult.data`.
+Esta linea la metemos en un script que llamaremos [rmquestionmark.sh](./mybin/rmquestionmark.sh).
+Este es el contenido:
 
+```
+#!/bin/bash
+# Se recibira el nombre del archivo a procesar como argumento de este script
+sed -i .bak "s/, ?,/,,/g" $1
+```
 
+Nuestro script se puede ejecutar por cualquier contenedor que tenga el shell Bash.
+De modo que la forma como se procesa el archivo es de la siguiente manera.
+
+```
+docker run --rm -v $(pwd)/mybin:/usr/local/mybin -v $(pwd)/data:/usr/local/data ubuntu /usr/local/mybin/rmquestionmark.sh /usr/local/data/adult.data
+```
+
+---
+
+Como podemos crear una linea de ejecucion de estos contenedores para que funcione con un solo comando?
