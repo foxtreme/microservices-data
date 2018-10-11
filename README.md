@@ -63,4 +63,56 @@ docker run --rm -v $(pwd)/mybin:/usr/local/mybin -v $(pwd)/data:/usr/local/data 
 
 ---
 
-Como podemos crear una linea de ejecucion de estos contenedores para que funcione con un solo comando?
+`docker-compose` es una herramienta que permite ejecutar varios contenedores con un solo comando. 
+En este caso queremos ejecutar nuestro primer contenedor el cual descarga un archivo de datos y luego elimina los datos `, ?,`. 
+
+El archivo que materializa esta ejecucion es `docker-compose.yml`.
+
+```
+version: "3"
+services:
+  download:
+    image: josanabr/mycurl
+    volumes:
+      - ./data:/usr/local/data
+      - ./mybin:/usr/local/mybin
+    command: /usr/local/mybin/adult.data.sh
+  rmquestionmark:
+    image: ubuntu
+    volumes:
+      - ./data:/usr/local/data
+      - ./mybin:/usr/local/mybin
+    command: /usr/local/mybin/rmquestionmark.sh adult.data
+```
+
+Sin embargo, esta ejecucion tiene un problema y es que `docker-compose` ejecuta los dos contenedores en **paralelo** y en este caso queremos una ejecucion **secuencial**, primero el contenedor `josanabr/mycurl` y luego el contenedor `ubuntu`.
+
+Para lograr esta ejecucion secuencial se hizo una modificacion en los scripts de modo que `adult.data.sh` al terminar su ejecucion cree un archivo llamado `terminado.txt` y la creacion de ese archivo es la senal para que `rmquestionmark.sh` comience a procesar el archivo descargado.
+
+Aqui la implementacion, `adult.data.sh`
+
+```
+#!/bin/bash
+PREFIXDIR="/usr/local/data"
+cd ${PREFIXDIR}
+curl http://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data > ${PREFIXDIR}/adult.data
+echo "Creando archivo $(pwd)/terminado.txt"
+touch terminado.txt
+```
+
+Observe que al final se crea el archivo `/usr/local/data/terminado.txt`. 
+Ahora la nueva implementacion de `rmquestionmark.sh`
+
+```
+#!/bin/bash
+# Se recibira el nombre del archivo a procesar como argumento de este script
+ARCHIVO="/usr/local/data/terminado.txt"
+while [ ! -f "${ARCHIVO}" ]; do
+  sleep 2
+done
+echo "Eliminando signos de interrogacion"
+sed -i.bak "s/, ?,/,,/g" $1
+rm "${ARCHIVO}"
+```
+
+Para probar la ejecucion ejecute desde una terminal `docker-compose up`.
