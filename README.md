@@ -40,3 +40,7 @@ docker run --rm -v $(pwd)/mybin:/usr/local/mybin -v $(pwd)/data:/usr/local/data 
 ```
 
 Una vez ejecutado este comando, usted debera encontrar en el directorio `$(pwd)` el archivo `adult.data`.
+
+---
+
+Hacer un script para procesar los datos
