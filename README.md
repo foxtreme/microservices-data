@@ -43,4 +43,8 @@ Una vez ejecutado este comando, usted debera encontrar en el directorio `$(pwd)`
 
 ---
 
-Hacer un script para procesar los datos
+Suponga ahora que usted tiene otro contenedor donde se procesan los datos.
+Construya un contenedor que lo que hace es remover los datos ',?,' del archivo descargado. 
+Para llevar a cabo esta tarea revisar las [diapositivas de la clase](https://docs.google.com/presentation/d/1l0WVWwXJE4K2kDnH-3q1e819doAnW8sneF40s7k78yo/edit?usp=sharing).
+
+
