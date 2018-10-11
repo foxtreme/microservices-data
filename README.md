@@ -39,7 +39,7 @@ La forma como se ejecuta entonces el contenedor para ejecutar el script es
 docker run --rm -v $(pwd)/mybin:/usr/local/mybin -v $(pwd)/data:/usr/local/data josanabr/mycurl /usr/local/mybin/adult.data.sh
 ```
 
-Una vez ejecutado este comando, usted debera encontrar en el directorio `$(pwd)` el archivo `adult.data`.
+Una vez ejecutado este comando, usted debera encontrar en el directorio `$(pwd)/data` el archivo `adult.data`.
 
 ---
 
