@@ -22,7 +22,20 @@ docker run --rm -it --hostname demo -v $(pwd)/data:/usr/local/data -v $(pwd)/myb
 
 Ahora usted usara su contenedor para descargar el archivo [adult.data](http://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data) que vimos en clases pasadas.
 
-* El archivo a descargar debera quedar ubicado en el directorio `$(pwd)/data`
-* Se sugiere hacer un script en Bash para ello y ese script es el que usted usara como argumento para ejecutar su imagen de Docker. Es decir, en lugar de usar `/bin/bash` como argumento, usted pasara su script como argumento
-  * Cuando ejecute el contenedor ya no necesitara pasar el argumento `--it` pues esta vez no ejecutara de forma interactiva su contenedor sino que lo usara para ejecutar un script en Bash 
-  * Asegurese que la salida del comando `curl` vaya a un archivo y que este archivo quede localizado en el directorio `/usr/local/data` del contenedor
+Se ha creado un script en Bash llamado [adult.data.sh](mybin/adult.data.sh) localizado en el directorio [mybin](mybin) de este repositorio. 
+Es importante que este script tenga permisos de ejecucion. 
+
+El contenido del script es el siguiente
+
+```
+#!/bin/bash
+cd /usr/local/data
+curl http://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data > /usr/local/data/adult.data
+```
+
+La forma como se ejecuta entonces el contenedor para ejecutar el script es 
+
+```
+docker run --rm -v $(pwd)/mybin:/usr/local/mybin -v $(pwd)/data:/usr/local/data josanabr/mycurl /usr/local/mybin/adult.data.sh
+```
+
