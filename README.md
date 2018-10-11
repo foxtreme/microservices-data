@@ -125,6 +125,6 @@ Identifique la ejecucion que permitira que a traves de un contenedor se pueda ej
 Haga los ajustes necesarios en:
 
 * [`docker-compose.yml`](docker-compose.yml)
-* [`rmquestionmark.sh`](rmquestionmark.sh)
+* [`rmquestionmark.sh`](mybin/rmquestionmark.sh)
 
 de modo que su script se convierta en la tercera etapa de procesamiento de los datos en `adult.data`.
