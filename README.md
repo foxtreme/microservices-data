@@ -1,6 +1,6 @@
 # Contenedor con curl instalado
 
-Este Dockerfile permite la creaci√n de una imagen de Docker y se ha personalizado tambien el *prompt* del shell.
+Este Dockerfile permite la creacion de una imagen de Docker y se ha personalizado tambien el *prompt* del shell.
 
 ```
 FROM ubuntu
