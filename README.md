@@ -116,3 +116,15 @@ rm "${ARCHIVO}"
 ```
 
 Para probar la ejecucion ejecute desde una terminal `docker-compose up`.
+
+---
+
+Se quiere procesar un campo de los que tiene el CSV, ese campo lo selecciona usted. 
+Genere un script que procese ese campo y arroje en un archivo plano el valor **maximo**, **minimo**, **mediana**.
+Identifique la ejecucion que permitira que a traves de un contenedor se pueda ejecutar su script.
+Haga los ajustes necesarios en:
+
+* [`docker-compose.yml`](docker-compose.yml)
+* [`rmquestionmark.sh`](rmquestionmark.sh)
+
+de modo que su script se convierta en la tercera etapa de procesamiento de los datos en `adult.data`.
