@@ -10,5 +10,10 @@ COPY bashrc /root/.bashrc
 
 Aqui el [Dockerfile](Dockerfile) y el [bashrc](bashrc).
 
-Como ejecutar un contenedor de modo que los directorios `data` y `mybin` en este directorio se puedan ver desde el contenedor en los directorios `/usr/local/data` y `/usr/local/bin`, respectivamente?
+Para ejecutar este contenedor de modo que los directorios `data` y `mybin` en este directorio se puedan ver desde el contenedor en los directorios `/usr/local/data` y `/usr/local/bin` se ejecuta de la siguiente manera
+
+```
+docker run --rm -it --hostname demo -v $(pwd)/data:/usr/local/data -v $(pwd)/mybin:/usr/local/mybin josanabr/mycurl /bin/bash
+```
+
 
