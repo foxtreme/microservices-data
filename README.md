@@ -128,3 +128,21 @@ Haga los ajustes necesarios en:
 * [`rmquestionmark.sh`](mybin/rmquestionmark.sh)
 
 de modo que su script se convierta en la tercera etapa de procesamiento de los datos en `adult.data`.
+
+---
+
+Se le pide que haga un ejercicio similar al anterior pero con esta fuente de datos [Crime Data from 2010 to Present](https://catalog.data.gov/dataset/crime-data-from-2010-to-present). 
+Estos datos son tomados de [este sitio](https://catalog.data.gov/dataset?tags=crime).
+
+Los items a programar son:
+
+* Descargar los datos via un contenedor
+* Preparación de los datos
+  * En el archivo descargado se observa que algunos campos tienen dentro de su valor el caracter `,`
+  * Este [script](processCSV.py) en Python el cual espera recibir como un flujo de entrada los datos de un archivo CSV y arroja por pantalla el nuevo archivo CSV pero cambia el delimitador `,` por `|`
+  * Se ha provisto de un [script en Bash](processCSV.sh) que recibe tres argumentos
+    * Un directorio que esta compartido entre el *host* y el contenedor
+    * Un archivo CSV al que se le desea cambiar su delimitador
+    * Un archivo donde residira el nuevo CSV con el nuevo delimitador
+  * Con el script en Bash usted pondra invocar su contenedor para ejecutar el archivo indicandole los argumentos que requiere para su correcta ejecucion
+* Sacar el promedio de uno de los datos bajo estudio
